@@ -11,7 +11,8 @@ export function useAs2Keywords() {
     async function loadKeywords() {
       try {
         setLoading(true);
-        const res = await fetch("/as2-keywords.xml");
+        const basePath = import.meta?.env?.BASE_URL || "/";
+        const res = await fetch(`${basePath}as2-keywords.xml`);
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
