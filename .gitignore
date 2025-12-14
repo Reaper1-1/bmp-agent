@@ -1,9 +1,41 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/settings.local.json
+*.swp
+*.swo
+*~
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+.venv
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Backup files
+*.bak
+*.backup
+
+# Legacy entries (keeping for compatibility)
 .vagrant
 /cookbooks
-
-# Bundler
 bin/*
 .bundle/*
-
 .kitchen/
 .kitchen.local.yml

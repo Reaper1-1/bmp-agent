@@ -207,4 +207,4 @@ Example mapping snippet:
 
 ---
 
-That's the template and examples — adapt the fields and wording to your platform (Base44) as needed. If you'd like, I can also produce a JSONL file with multiple agents or translate these to Base44 key names directly.````
+That's the template and examples — adapt the fields and wording to your platform (Base44) as needed. If you'd like, I can also produce a JSONL file with multiple agents or translate these to Base44 key names directly.

@@ -1,0 +1,106 @@
+{
+  "walkthroughs": [
+    {
+      "id": "bmp-agent-intro",
+      "title": "Better Man Project Agent Configuration",
+      "description": "Learn how to configure AI agents for pastoral coaching and spiritual growth",
+      "steps": [
+        {
+          "id": "understand-schema",
+          "title": "Understand the Agent Schema",
+          "description": "Agent configurations follow a standard JSON schema with identity, model parameters, data access, tools, and metadata.\n\n[Open README.md](command:vscode.open?%5B%7B%22path%22%3A%22README.md%22%7D%5D)",
+          "media": {
+            "markdown": "## Core Schema Sections\n\n- **Identity**: `id`, `name`, `description`\n- **Model params**: `model`, `temperature`, `top_p`, `max_tokens`\n- **Data access**: `entities` array for database tables/views/RPCs\n- **Tools**: `tools` and `allowed_tools` arrays\n- **Instructions**: `system_prompt` and `instructions`\n- **Metadata**: `visible`, `tags`, `metadata`"
+          }
+        },
+        {
+          "id": "model-selection",
+          "title": "Choose the Right Model",
+          "description": "Different agent types require different models and temperature settings.\n\n[View Model Guidelines](command:markdown.showPreview?%5B%22README.md%22%5D)",
+          "media": {
+            "markdown": "## Model Selection Patterns\n\n**Coach/Pastoral Agents**\n- Model: `gpt-5.1-mini`\n- Temperature: `0.4-0.7`\n- Use for: Empathetic, conversational responses\n\n**Builder/Reasoning Agents**\n- Model: `gpt-5.1`\n- Temperature: `0.1-0.3`\n- Use for: Structured, precise outputs\n\n**Orchestrator Agents**\n- Model: `gpt-5.1-mini`\n- Temperature: `0.3`\n- Use for: Classification and routing"
+          }
+        },
+        {
+          "id": "prayer-coach-example",
+          "title": "Study the Prayer Coach Example",
+          "description": "The `prayer_coach` agent is a complete reference implementation showing all schema fields.\n\n[Jump to Prayer Coach](command:workbench.action.findInFiles?%7B%22query%22%3A%22prayer_coach%22%2C%22filesToInclude%22%3A%22README.md%22%7D)",
+          "media": {
+            "markdown": "## Key Features\n\n- Accesses `JournalEntry`, `DailyProgress`, `Devotional`, `BibleStudy`\n- Calls RPCs to fetch devotionals and journal entries\n- Structured output: Heart Check / Guidance / Sample Prayer / Scripture Anchor\n- Temperature: `0.5` for empathetic responses"
+          }
+        },
+        {
+          "id": "system-prompts",
+          "title": "Craft Effective System Prompts",
+          "description": "System prompts should reference the unified style guide, define role, specify output format, and include security rules.",
+          "media": {
+            "markdown": "## System Prompt Structure\n\n1. Reference unified style guide\n2. Define role identity and purpose\n3. Specify interaction approach (empathy, directness)\n4. Outline output format with named sections\n5. Add security/runtime rules\n6. End with: \"Use internal reasoning silently; output only the final [result]\""
+          }
+        },
+        {
+          "id": "tools-definition",
+          "title": "Define Tools and Scopes",
+          "description": "Tools enable agents to call RPCs or HTTP webhooks. Always specify scopes for access control.",
+          "media": {
+            "markdown": "## Tool Pattern\n\n```json\n{\n  \"name\": \"rpc.fetch_today_devotional\",\n  \"type\": \"rpc\",\n  \"description\": \"Supabase RPC: get today's devotional\",\n  \"endpoint\": \"/rpc/fetch_today_devotional\",\n  \"scopes\": [\"read:devotional\"]\n}\n```\n\nHTTP tools add `url` and `method` fields."
+          }
+        },
+        {
+          "id": "create-new-agent",
+          "title": "Create Your First Agent",
+          "description": "Follow the checklist to add a new agent configuration to README.md.\n\n[View Checklist](command:workbench.action.findInFiles?%7B%22query%22%3A%22Quick%20Checklist%22%2C%22filesToInclude%22%3A%22README.md%22%7D)",
+          "media": {
+            "markdown": "## Creation Checklist\n\n- [ ] Pick model and temperature\n- [ ] Enumerate entities needed\n- [ ] Declare tools with scopes\n- [ ] Set allowed_tools subset\n- [ ] Write system_prompt with output format\n- [ ] Add tags for filtering\n- [ ] Set visible and allowed_user_roles"
+          }
+        },
+        {
+          "id": "base44-mapping",
+          "title": "Map to Base44 Platform",
+          "description": "If using Base44, map generic field names to platform-specific keys.",
+          "media": {
+            "markdown": "## Key Mappings\n\n- `id` → `agent_id`\n- `name` → `title`\n- `system_prompt` → `developer_instructions`\n- `entities` → `allowed_entities`\n- `tools` → `integrations`\n\nSee section 4 in README.md for examples."
+          }
+        }
+      ]
+    },
+    {
+      "id": "bmp-agent-advanced",
+      "title": "Advanced Agent Configuration",
+      "description": "Deep dive into entity access, tool scopes, and multi-agent workflows",
+      "steps": [
+        {
+          "id": "entity-access",
+          "title": "Configure Entity Access",
+          "description": "The `entities` array controls which database tables, views, and RPCs an agent can access.",
+          "media": {
+            "markdown": "## Common Entities\n\n**User Data**\n- `JournalEntry` - User journal entries\n- `DailyProgress` - Daily check-ins and metrics\n- `PrayerRequest` - Prayer requests and intentions\n\n**Content**\n- `Devotional` - Daily devotional content\n- `BibleStudy` - Study materials and guides\n- `Scripture` - Bible verses and references\n\n**Relationships**\n- `Accountability` - Accountability partner data\n- `Community` - Group and community info"
+          }
+        },
+        {
+          "id": "tool-scopes",
+          "title": "Implement Scope-Based Security",
+          "description": "Use scopes to control tool access and enforce least-privilege principles.",
+          "media": {
+            "markdown": "## Scope Patterns\n\n**Read Scopes**\n- `read:devotional` - View devotional content\n- `read:journals` - Access user journals\n- `read:prayer` - Read prayer requests\n\n**Write Scopes**\n- `write:prayer_intents` - Create prayer records\n- `write:progress` - Update user progress\n- `write:notifications` - Send notifications\n\n**Admin Scopes**\n- `admin:users` - Manage user accounts\n- `admin:content` - Manage content"
+          }
+        },
+        {
+          "id": "multi-agent-patterns",
+          "title": "Design Multi-Agent Workflows",
+          "description": "Use orchestrator agents to coordinate specialist agents for complex user needs.",
+          "media": {
+            "markdown": "## Orchestrator Pattern\n\nThe `workflow_meta_agent` analyzes user input and:\n1. Classifies the primary need\n2. Recommends 1-3 specialist agents\n3. Provides prompts for each agent\n4. Suggests call order\n\n**Example Flow**\nUser: \"I'm struggling with anger\"\n→ Orchestrator recommends: Prayer Coach + Leadership Mentor\n→ Prayer Coach: Guides immediate prayer response\n→ Leadership Mentor: Addresses root causes and habits"
+          }
+        },
+        {
+          "id": "testing-validation",
+          "title": "Test and Validate Configurations",
+          "description": "Use JSON Schema validation to catch configuration errors early.",
+          "media": {
+            "markdown": "## Validation Features\n\nThis workspace includes:\n- **JSON Schema validation** for `*agent*.json` files\n- **Required fields**: `id`, `name`, `description`, `model`\n- **Type checking** for all standard fields\n- **Auto-complete** in VS Code\n\nCreate a file matching `*agent*.json` to see validation in action!"
+          }
+        }
+      ]
+    }
+  ]
+}

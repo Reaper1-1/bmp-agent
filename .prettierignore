@@ -1,0 +1,9 @@
+# Ignore patterns for Prettier
+*.min.js
+*.min.css
+.git/
+.vscode/
+node_modules/
+dist/
+build/
+coverage/

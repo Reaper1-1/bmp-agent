@@ -1,0 +1,215 @@
+{
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": [],
+  // Editor settings
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.trimAutoWhitespace": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  // Markdown settings
+  "markdown.extension.toc.levels": "2..6",
+  "markdown.extension.list.indentationSize": "inherit",
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  // JSON settings
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.tabSize": 2
+  },
+  // Markdown linting
+  "markdownlint.config": {
+    "MD032": false,
+    "MD033": false,
+    "MD041": false
+  },
+  // Git settings
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  // GitLens settings
+  "gitlens.codeLens.enabled": true,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": true,
+  "gitlens.currentLine.enabled": true,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.blame.format": "${author|10} ${date}",
+  "gitlens.blame.highlight.enabled": true,
+  "gitlens.blame.avatars": false,
+  "gitlens.views.commits.files.layout": "tree",
+  "gitlens.views.repositories.files.layout": "tree",
+  // Search settings
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  // File associations
+  "files.associations": {
+    "*.json": "jsonc",
+    "*.md": "markdown"
+  },
+  // Prettier settings
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  // JSON Schema validation
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "*agent*.json"
+      ],
+      "schema": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "model"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the agent"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description for UI/tooling"
+          },
+          "model": {
+            "type": "string",
+            "enum": [
+              "gpt-5.1",
+              "gpt-5.1-mini",
+              "gpt-4.1"
+            ],
+            "description": "AI model to use"
+          },
+          "temperature": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 2,
+            "description": "Randomness: 0.1-0.3 precise, 0.4-0.7 conversational"
+          },
+          "top_p": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "max_tokens": {
+            "type": "number",
+            "minimum": 1
+          },
+          "entities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Database tables/views/RPCs the agent can access"
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "type"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "rpc",
+                    "http"
+                  ]
+                },
+                "description": {
+                  "type": "string"
+                },
+                "endpoint": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                },
+                "scopes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "allowed_tools": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Subset of tools permitted at runtime"
+          },
+          "system_prompt": {
+            "type": "string",
+            "description": "Developer/system prompt with instructions and output format"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Concise run-time instructions"
+          },
+          "visible": {
+            "type": "boolean",
+            "description": "Whether agent appears in UI"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags for filtering (e.g., prayer, coach, pastoral)"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "created_by": {
+                "type": "string"
+              },
+              "allowed_user_roles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  // Workspace recommendations
+  "workbench.startupEditor": "readme",
+  "workbench.tips.enabled": true
+}

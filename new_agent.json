@@ -1,0 +1,15 @@
+{
+  "id": "new_agent",
+  "name": "New Agent",
+  "description": "Description of what this agent does",
+  "model": "gpt-5.1-mini",
+  "temperature": 0.5,
+  "top_p": 0.95,
+  "max_tokens": 2000,
+  "entities": [],
+  "tools": [],
+  "allowed_tools": [],
+  "system_prompt": "Use the Better Man Project — Unified Style Guide. You are...",
+  "visible": true,
+  "tags": []
+}
