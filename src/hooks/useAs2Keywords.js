@@ -6,15 +6,12 @@ export function useAs2Keywords() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const controller = new AbortController();
     let cancelled = false;
 
     async function loadKeywords() {
       try {
         setLoading(true);
-        const res = await fetch("/as2-keywords.xml", {
-          signal: controller.signal,
-        });
+        const res = await fetch("/as2-keywords.xml");
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
         }
@@ -23,10 +20,6 @@ export function useAs2Keywords() {
         // Parse XML in browser
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, "application/xml");
-
-        if (doc.querySelector("parsererror")) {
-          throw new Error("Failed to parse AS2 keywords XML");
-        }
 
         const keywordNodes = doc.getElementsByTagName("keyword");
         const set = new Set();
@@ -50,13 +43,12 @@ export function useAs2Keywords() {
           setError(null);
         }
       } catch (err) {
-        if (controller.signal.aborted) return;
         console.error("Failed to load AS2 keywords:", err);
         if (!cancelled) {
           setError(err);
         }
       } finally {
-        if (!cancelled && !controller.signal.aborted) {
+        if (!cancelled) {
           setLoading(false);
         }
       }
@@ -65,7 +57,6 @@ export function useAs2Keywords() {
     loadKeywords();
     return () => {
       cancelled = true;
-      controller.abort();
     };
   }, []);
 
